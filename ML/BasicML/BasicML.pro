@@ -13,8 +13,15 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    utils.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    utils.h
 
 FORMS    += mainwindow.ui
+
+INCLUDEPATH += /usr/local/include/opencv
+INCLUDEPATH += /usr/local/include/opencv2
+
+LIBS += `pkg-config opencv --cflags --libs`

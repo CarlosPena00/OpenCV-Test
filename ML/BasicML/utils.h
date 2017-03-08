@@ -6,6 +6,7 @@ class Utils
 {
 public:
     Utils();
+
 };
 
 #endif // UTILS_H

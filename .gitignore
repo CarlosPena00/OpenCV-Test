@@ -1,15 +1,11 @@
 # Qt build forlders
 build-*
-src/build-*
-src/*.o
-src/moc*
-src/VSSL
-src/VSSL.pro.user
-src/Makefile
-src/\.qmake\.stash
-src/moc_mainwindow\.cpp
-src/ui_mainwindow\.h
-src/VSSL\.app/Contents/Info\.plist
-src/VSSL\.app/Contents/MacOS/VSSL
-src/VSSL\.app/Contents/PkgInfo
-src/VSSL\.app/Contents/Resources/empty\.lproj
+ML/BasicML/build-*
+ML/BasicML/*.o
+ML/BasicML/moc*
+ML/BasicML/BasicML
+ML/BasicML/BasicML.pro.user*
+ML/BasicML/Makefile
+ML/BasicML/\.qmake\.stash
+ML/BasicML/moc_mainwindow\.cpp
+ML/BasicML/ui_mainwindow\.h
