@@ -1,5 +1,5 @@
 //g++ MatAcess.cpp -o a `pkg-config --cflags opencv --libs`
-// Maybe -O3 
+// Maybe -O3, -fopenmp
 
 #include <opencv2/opencv.hpp>
 #include <iostream>
@@ -96,6 +96,7 @@ public:
 
 
 
+
 class Parallel_clipBufferValues: public cv::ParallelLoopBody
 {
 private:
@@ -125,6 +126,7 @@ int main()
     cv::Mat src = original.clone();
     cv::Mat src2 = src.clone();
     cv::Mat src3 = src.clone();
+    cv::Mat src4 = src.clone();
     cv::Mat FullRedOpenCV_1 = src.clone();
     cv::Mat FullRedOpenCV_2 = src.clone();
     uchar* p2 = src.data;
@@ -164,6 +166,15 @@ int main()
         sum3 += OpenMP_2(src3);
     std::cout<<"5) OpenMP_2"<<std::endl<<"Time: "<<sum3<<std::endl;
 
+    begin = clock();
+    for(int i = 0 ; i < Ninter ; i++)
+        std::for_each(src4.begin<cv::Vec3b>(), src4.end<cv::Vec3b>(), [](cv::Vec3b& pixel)
+        {
+            pixel.val[2] = 255;
+        });
+    end = clock();
+    diff = double(end - begin) / CLOCKS_PER_SEC;
+    std::cout<<"6) Std::for_Each"<<std::endl<<"Time: "<<diff<<std::endl;
 
 /*
     cv::imshow("Ori",original);
@@ -171,8 +182,9 @@ int main()
     cv::imshow("FullRedMatrix_OpenCV_2",FullRedOpenCV_2);
     cv::imshow("TBB",src);
     cv::imshow("Parallel_for_",src2);
-*/
     cv::imshow("OpenMP_2",src3);
+    cv::imshow("Std::ForEach",src4);
+*/
 
     cv::waitKey(0);
 
