@@ -17,7 +17,7 @@ using namespace cv;
 using namespace std;
 using namespace tbb ;
 
-double FullRedMatrix_OpenCV(cv::Mat &src){
+double RedMatrix_OpenCV(cv::Mat &src){
 
     int rows = src.rows;
     int cols = src.cols;
@@ -37,7 +37,7 @@ double FullRedMatrix_OpenCV(cv::Mat &src){
 }
 
 
-double FullRedMatrix_OpenCV_2(cv::Mat &src){
+double RedMatrix_OpenCV_2(cv::Mat &src){
 
     int rows = src.rows;
     int cols = src.cols;
@@ -130,18 +130,18 @@ int main()
     cv::Mat FullRedOpenCV_1 = src.clone();
     cv::Mat FullRedOpenCV_2 = src.clone();
     uchar* p2 = src.data;
-    uchar* p3 = src2.data;
+    uchar* p3 = src.data;
 
     int nElements = src.cols*src.rows;
 
     double sum = 0, sum2 = 0, sum3 = 0;
 
     for(int i = 0 ; i < Ninter ; i ++)
-        sum += FullRedMatrix_OpenCV(FullRedOpenCV_1);
+        sum += RedMatrix_OpenCV(FullRedOpenCV_1);
     std::cout<<"1) src.at<cv::Vec3b>(j,i)"<<std::endl<<"Time : "<<sum<<std::endl;
 
     for(int i = 0 ; i < Ninter ; i ++)
-        sum2 += FullRedMatrix_OpenCV_2(FullRedOpenCV_2);
+        sum2 += RedMatrix_OpenCV_2(FullRedOpenCV_2);
     std::cout<<"2) cv::Vec3b* row = src.ptr<cv::Vec3b>(j)"<<std::endl<<"Time: "<<sum2<<std::endl;
 
     task_scheduler_init init;
@@ -178,8 +178,8 @@ int main()
 
 /*
     cv::imshow("Ori",original);
-    cv::imshow("FullRedMatrix_OpenCV",FullRedOpenCV_1);
-    cv::imshow("FullRedMatrix_OpenCV_2",FullRedOpenCV_2);
+    cv::imshow("RedMatrix_OpenCV",FullRedOpenCV_1);
+    cv::imshow("RedMatrix_OpenCV_2",FullRedOpenCV_2);
     cv::imshow("TBB",src);
     cv::imshow("Parallel_for_",src2);
     cv::imshow("OpenMP_2",src3);
